@@ -15,7 +15,7 @@ var g_nationality = {
     errors: 0
 }
 
-var socket = new W3CWebSocket("ws://localhost:8090");
+var socket = new W3CWebSocket("ws://localhost:2200");
 socket.onerror = function () {
     console.log("An error occured.");
 }
