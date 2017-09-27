@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>PopCorn DB</title>
+        <link rel="icon" type="image/png" href="/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="/index.css">
+	</head>
+	
+	<body>
+		<div id="bg"></div>
+        <div id="particles"></div>
+        <main id="main">
+            <img draggable="false" src="/logo.png" alt="Logo" id="logo" v-if="feature != 'f'">
+            <div id="searchbar" class="shadow rounded">
+                <!-- Send feature code + searchbar content -->
+                <input placeholder="Votre titre de film" id="searchinput" type="text" maxlength="75"
+                       oninput="socket.send(vue.feature + this.value)" v-model="movie_title"
+                        onfocus="if (vue.feature === 'f') {vue.feature = 'd'; vue.full_movie = null; socket.send('d' + this.value)}">
+            </div>
+            <ul id="autocomplete" v-if="feature == 'd'">
+                <li v-for="suggestion in autocomplete" v-on:click="feature = 'f'; socket.send('f'+suggestion.title)">
+                    <img class="autocomplete-result-thumbnail" :src="suggestion.cover" :alt="suggestion.title">
+                    <span class="autocomplete-result-text">
+                        <span class="autocomplete-result-title">{{suggestion.title}}</span>
+                        <span class="autocomplete-result-complement">{{suggestion.director_date}}</span>
+                    </span>
+                </li>
+            </ul>
+            <ul id="analysis" v-if="feature == 'a'">
+                <li v-for="prediction in predictions.genre" class="bar-main-container violet">
+                    <div class="wrap">
+                        <div class="bar-percentage">{{Object.keys(prediction)[0]}} {{Object.values(prediction)[0]}}%</div>
+                        <div class="bar-container">
+                            <div class="bar" :style="'width: '+Object.values(prediction)[0]+'%;'"></div>
+                        </div>
+                    </div>
+                </li>
+                <li v-for="prediction in predictions.nationality" class="bar-main-container red">
+                    <div class="wrap">
+                        <div class="bar-percentage">{{Object.keys(prediction)[0]}} {{Object.values(prediction)[0]}}%</div>
+                        <div class="bar-container">
+                            <div class="bar" :style="'width: '+Object.values(prediction)[0]+'%;'"></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div id="fullmovie" v-if="feature == 'f' && full_movie">
+                <div id="fullmovie-header" class="azure">
+                    <h2 class="">{{full_movie.title}}</h2>
+                    <div id="rating">
+                        <div id="rating-score">
+                            <img src="/star.png" id="star">
+                            <div id="ratingValue">
+                                <div>
+                                    <span class="big">{{full_movie.score_viewers}}</span>
+                                    <span class="grey">/</span>
+                                    <span class="grey">5</span>
+                                </div>
+                                <span class="small">{{full_movie.reviews_viewers}} critiques</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="medium whiteish" v-html="this.full_movie.duration_genre_date"></div>
+                </div>
+                <video controls autoplay v-if="full_movie.trailer">
+                    <source :src="full_movie.trailer" type="video/mp4">
+                </video>
+                <div class="shot-holder cf">
+                    <a v-for="pic in full_movie.pictures" class="shot-item" href="javascript:void(0)" :title="'Images du film : '+full_movie.title">
+                        <img class="shot-img b-loaded" :src="pic" :alt="'Images du film : '+full_movie.title" width="300" height="300">
+                    </a>
+                </div>
+                <div class="clear"></div>
+                <p class="wrap no-margin">{{full_movie.synopsis}}</p>
+                <hr>
+                <div class="item wrap no-margin">
+                    <span class="what light">Directeur</span>
+                    <span class="that">{{full_movie.director}}</span>
+                    <span class="what light">Acteurs</span>
+                    <span class="that">{{full_movie.actors.join(", ")}}</span>
+                    <span class="what light">Nationalités</span>
+                    <span class="that">{{full_movie.nationalities.join(", ")}}</span>
+                </div>
+                <hr>
+                <p class="wrap no-margin" v-html="full_movie.misc"></p>
+            </div>
+            <ul id="features">
+                <li>
+                    <!-- d for discover -->
+                    <input type="radio" id="feature-discover" name="feature" checked="checked" v-on:change="feature = 'd'; socket.send('d' + movie_title)">
+                    <label for="feature-discover">Rechercher un film</label>
+                    <div class="check"></div>
+                </li>
+                <li>
+                    <!-- a for analyze -->
+                    <input type="radio" id="feature-analyze" name="feature" v-on:change="feature = 'a'; socket.send('a' + movie_title)">
+                    <label for="feature-analyze">Analyser un titre</label>
+                    <div class="check"><div class="inside"></div></div>
+                </li>
+            </ul>
+        </main>
+        <script src="/vue.js" type="text/javascript"></script>
+        <script src="/particles.js" type="text/javascript"></script>
+        <script src="/app.js" type="text/javascript"></script>
+	</body>
+</html>

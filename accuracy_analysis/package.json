@@ -1,0 +1,15 @@
+{
+  "name": "movie_nationality_and_genre_prediction_analysis",
+  "version": "1.0.0",
+  "description": "movie_nationality_and_genre_prediction_analysis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Valentin Mercier <vmercier@me.com> (https://www.smartpap.fr/)",
+  "license": "ISC",
+  "dependencies": {
+    "json-stringify-safe": "^5.0.1",
+    "websocket": "^1.0.24"
+  }
+}
