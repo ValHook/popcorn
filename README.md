@@ -24,3 +24,5 @@ To reuse the CPU idle time when waiting for network responses I configured Spark
 3. ```./AllocineBackend```
 4. Visit [http://localhost:2200](http://localhost:2200)
 5. Feel free to daeomonize the backend with an ```init.d``` service or even proxy/change the port to 80.
+
+*You will need to re-crawl the movies because I could not upload the database and the images to this git repository since GitHub enforces a file/repo size limit. You might additionally want to disable the InfluxDB logging featured inside the crawler if you do not want to install InfluxDB*
