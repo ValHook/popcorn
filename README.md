@@ -4,16 +4,16 @@ PopCorn DB [http://popcorn-db.net](http://popcorn-db.net) is a personal project 
 
 ### A fast & scalable web crawler.
 *I used Apache Spark for parallel computing, and InfluxDB for logging in live its activity.
-To reuse the CPU idle time when waiting for network responses I configured Spark to create 8 times more executors than CPU cores for each machine of the cluster*
+To reuse the CPU idle time when waiting for network responses I configured Spark to create 8 times more executors than CPU cores for each machine of the cluster.*
 
 ### A blazingly fast custom built search-engine with fuzzy search and autocompletion.
-*The average query time for 100K movies is 0.03ms. The speed is obtained by indexing every possible ngram of each movie title. The fuzzy search is done by building & exploring Levenstein automata on the go*
+*The average query time for 100K movies is 0.03ms. The speed is obtained by indexing every possible ngram of each movie title. The fuzzy search is done by building & exploring Levenstein automata on the go.*
 
 ### A movie genre & nationality predictor
-*I used a naive bayes network approach as it seemed after experimentation to be the best Machine Learning model adapted to this case*
+*I used a naive bayes network approach as it seemed after experimentation to be the best Machine Learning model adapted to this case.*
 
 ### A web-server, socket-server and front-end
-* The search engine and machine learning layers are written in C++. So I decided to build a web-server also in my C++ program. No need of Apache or nginx, less overhead = more speed*
+*The search engine and machine learning layers are written in C++. So I decided to build a web-server also in my C++ program. No need of Apache or nginx, less overhead = more speed.*
 
 # Presentation Slides
 [https://www.hutworks.net/PopcornValentinMercierFinalProjectSlides.pdf](https://www.hutworks.net/PopcornValentinMercierFinalProjectSlides.pdf)
