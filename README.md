@@ -1,5 +1,5 @@
 # Popcorn DB
-PopCorn DB [http://popcorn-db.net](http://popcorn-db.net) is a personal project which aims at recreating **from scrath** an IMDB like website with a machine learning layer on top of it.
+PopCorn DB [http://popcorn-db.net](http://popcorn-db.net) is a personal project which aims at recreating **from scratch** an IMDB like website with a machine learning layer on top of it.
 **Therefore it includes the following features:**
 
 ### A fast & scalable web crawler.
